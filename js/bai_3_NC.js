@@ -11,39 +11,42 @@
  * hangTram = Math.floor(tam / 100);
   hangChuc = Math.floor((tam % 100) / 10);
   hangDonvi = tam % 10;
-  #soChuSo = 3 (số có 3 chữ số)
- * * nếu giá trị  = 1 thì là một
- * nếu giá trị  =  thì là hai
- * nếu giá trị  = 3 thì là ba
- * nếu giá trị  = 4 thì là bốn
- * nếu giá trị  = 5 thì là năm
- * nếu giá trị  = 6 thì là sáu
- * nếu giá trị  = 7 thì là bảy
- * nếu giá trị  = 8 thì là tám
- * nếu giá trị  = 9 thì là chín
- * nếu giá trị  = 10 thì là mười
- * lấy từng giá trị ra và đọc theo từng lượt
- * ts vị trí hằng trăm thì thêm trăm
- * đối với vị trí hàng chục nếu tại đó:{
- *      nếu tại đó giaTri = 1 thì đọc là mười
- *      khác một thì đọc giaTri sau đó thêm "mươi"
+ * nếu giá trị  = 1 thì là "một"
+ * nếu giá trị  = 2 thì là "hai"
+ * nếu giá trị  = 3 thì là "ba"
+ * nếu giá trị  = 4 thì là "bốn"
+ * nếu giá trị  = 5 thì là "năm"
+ * nếu giá trị  = 6 thì là "sáu"
+ * nếu giá trị  = 7 thì là "bảy"
+ * nếu giá trị  = 8 thì là "tám"
+ * nếu giá trị  = 9 thì là "chín"
+ * #lấy từng giá trị ra và đọc theo từng lượt
+ * # với hàng trăm thì lấy ra sau đó so với giá trị rồi thêm "trăm"
+ * # Với hàng chục thì phân ra:
+ *  nếu hangChuc > 0 thì {
+ *      nếu hangChuc == 1 thì đọc là mười
+ *      ngược lại nếu hangChuc > 1 thì đọc giá trị và thêm "mươi"
+ * } ngược lại nếu hangChuc == 0 và hangDonVi > 0 {
+ *      thì thêm ghi "linh"
  * }
- * đới với hàng đơn vị:{
- *      nếu tại đó giaTri = 1 thì đọc là "mốt"
- *      khác thì đọc giaTri
- * }
+ * #Với hàng đơn vị thì phân ra: 
+ * nếu hangDonVi > 1
+ *      nếu hangDonVi != 5 thì in giá trị
+ *      ngược lại thì 
+ *          nếu hangChuc == 0 thì in ra "năm";
+ *          ngược lại thì in ra "lăm"
+ * ngược lại nếu hangDonVi == 1 và hangChuc <= 1 thì in "một"
+ * ngược lại nếu hangDonVi == 1 và hangChuc >1 thì in "mốt"
  * B3: hiển thị kết quả lên UI
  * Khối 3:
- * Đọc ba số vừa nhập
+ * Đọc ba số vừa nhập 
  */
-function DocGiaTri(giaTri, dem) {
+
+// Đọc ba số nhập vào từ 100 đến 999
+function DocGiaTri(giaTri) {
   switch (giaTri) {
     case 1: {
-      if (dem == 2) {
-        return 'mười ';
-      } else {
-        return 'một ';
-      }
+      return 'một ';
     }
     case 2: {
       return 'hai ';
@@ -55,11 +58,7 @@ function DocGiaTri(giaTri, dem) {
       return 'bốn ';
     }
     case 5: {
-      if (dem == 1) {
-        return 'lăm';
-      } else {
-        return 'năm ';
-      }
+      return 'năm ';
     }
     case 6: {
       return 'sáu ';
@@ -78,31 +77,35 @@ function DocGiaTri(giaTri, dem) {
 document.getElementById('btnBT3NC').onclick = function () {
   var so = parseInt(document.getElementById('inputDocSo').value);
   var tam = so;
-  var soChuSo = 3;
   var text = '';
   var hangTram, hangChuc, hangDonvi;
   hangTram = Math.floor(tam / 100);
   hangChuc = Math.floor((tam % 100) / 10);
   hangDonvi = tam % 10;
-  console.log(hangTram, hangChuc, hangDonvi);
-  text += DocGiaTri(hangTram, soChuSo--) + 'trăm ';
-  if (hangChuc != 0) {
-    text += DocGiaTri(hangChuc, soChuSo);
-    if (hangChuc > 1) {
-      text += 'mươi ';
+  text += DocGiaTri(hangTram) + 'trăm ';
+  if (hangChuc > 0) {
+    if (hangChuc == 1) {
+      text += 'mười ';
+    } else if (hangChuc > 1) {
+      text += DocGiaTri(hangChuc) + 'mươi ';
     }
   } else if (hangChuc == 0 && hangDonvi > 0) {
     text += 'linh ';
   }
-  soChuSo--;
   if (hangDonvi > 1) {
-    text += DocGiaTri(hangDonvi, soChuSo);
+    if (hangDonvi != 5) {
+      text += DocGiaTri(hangDonvi);
+    } else {
+      if (hangChuc == 0) {
+        text += 'năm';
+      } else {
+        text += 'lăm';
+      }
+    }
   } else if (hangDonvi == 1 && hangChuc <= 1) {
     text += 'một';
   } else if (hangDonvi == 1 && hangChuc > 1) {
     text += 'mốt';
   }
-  console.log(text);
-
   document.getElementById('txtBT3NC').innerHTML = text;
 };
