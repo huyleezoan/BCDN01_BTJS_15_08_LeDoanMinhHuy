@@ -52,7 +52,11 @@ function DocGiaTri(giaTri, dem) {
       return 'bốn ';
     }
     case 5: {
-      return 'năm ';
+      if (dem == 1) {
+        return 'lăm';
+      } else {
+        return 'năm ';
+      }
     }
     case 6: {
       return 'sáu ';

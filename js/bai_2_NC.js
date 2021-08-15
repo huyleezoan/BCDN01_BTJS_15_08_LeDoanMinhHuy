@@ -51,5 +51,5 @@ document.getElementById('btnBT2NC').onclick = function () {
       break;
   }
   document.getElementById('txtBT2NC').innerHTML =
-    'Tháng ' + thang + ' trong năm ' + nam + ' co ' + ngay + ' ngày';
+    'Tháng ' + thang + ' trong năm ' + nam + ' có ' + ngay + ' ngày';
 };
