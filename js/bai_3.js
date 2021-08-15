@@ -68,11 +68,11 @@ document.getElementById('btnBT3').onclick = function () {
     }
   }
   if (soChan == 3) {
-    text = 'Co 3 so chan';
+    text = 'Có 3 số chẵn';
   } else if (soChan == 0) {
-    text = 'Co 3 so le';
+    text = 'Có 3 số lẻ';
   } else {
-    text = 'Co ' + soChan + ' so chan' + ' va ' + (3 - soChan) + ' so le';
+    text = 'Có ' + soChan + ' số chẵn' + ' và ' + (3 - soChan) + ' số lẻ';
   }
   document.getElementById('txtBT3').innerHTML = text;
 };
