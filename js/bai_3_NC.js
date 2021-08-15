@@ -13,10 +13,10 @@
  * nếu giaTri = 4 thì là bốn
  * nếu giaTri = 5 thì là năm
  * nếu giaTri = 6 thì là sáu
- * nếu giaTri = 7 thì là một
- * nếu giaTri = 8 thì là một
- * nếu giaTri = 9 thì là một
- * nếu giaTri = 10 thì là một
+ * nếu giaTri = 7 thì là bảy
+ * nếu giaTri = 8 thì là tám
+ * nếu giaTri = 9 thì là chín
+ * nếu giaTri = 10 thì là mười
  * lấy từng giá trị ra và đọc theo từng lượt
  * ts vị trí hằng trăm thì thêm trăm
  * đối với vị trí hàng chục nếu tại đó:{
