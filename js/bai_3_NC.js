@@ -7,16 +7,21 @@
  * B1: Tạo biến và lấy giá trị từ form
  * B2: Đọc số
  * Vd: 123
- * * nếu giaTri = 1 thì là một
- * nếu giaTri = 2 thì là hai
- * nếu giaTri = 3 thì là ba
- * nếu giaTri = 4 thì là bốn
- * nếu giaTri = 5 thì là năm
- * nếu giaTri = 6 thì là sáu
- * nếu giaTri = 7 thì là bảy
- * nếu giaTri = 8 thì là tám
- * nếu giaTri = 9 thì là chín
- * nếu giaTri = 10 thì là mười
+ * #Lấy giá trị của của từng đơn vị như hangTram, hanChuc, hangDonVi
+ * hangTram = Math.floor(tam / 100);
+  hangChuc = Math.floor((tam % 100) / 10);
+  hangDonvi = tam % 10;
+  #soChuSo = 3 (số có 3 chữ số)
+ * * nếu giá trị  = 1 thì là một
+ * nếu giá trị  =  thì là hai
+ * nếu giá trị  = 3 thì là ba
+ * nếu giá trị  = 4 thì là bốn
+ * nếu giá trị  = 5 thì là năm
+ * nếu giá trị  = 6 thì là sáu
+ * nếu giá trị  = 7 thì là bảy
+ * nếu giá trị  = 8 thì là tám
+ * nếu giá trị  = 9 thì là chín
+ * nếu giá trị  = 10 thì là mười
  * lấy từng giá trị ra và đọc theo từng lượt
  * ts vị trí hằng trăm thì thêm trăm
  * đối với vị trí hàng chục nếu tại đó:{
@@ -36,8 +41,6 @@ function DocGiaTri(giaTri, dem) {
     case 1: {
       if (dem == 2) {
         return 'mười ';
-      } else if (dem == 1) {
-        return 'mốt';
       } else {
         return 'một ';
       }
@@ -77,15 +80,29 @@ document.getElementById('btnBT3NC').onclick = function () {
   var tam = so;
   var soChuSo = 3;
   var text = '';
-  var giaTri = 0;
-  giaTri = Math.floor(tam / 100);
-  text += DocGiaTri(giaTri, soChuSo--);
-  giaTri = Math.floor((tam % 100) / 10);
-  text += 'trăm ' + DocGiaTri(giaTri, soChuSo--);
-  if (giaTri != 1) {
-    text += 'mươi ';
+  var hangTram, hangChuc, hangDonvi;
+  hangTram = Math.floor(tam / 100);
+  hangChuc = Math.floor((tam % 100) / 10);
+  hangDonvi = tam % 10;
+  console.log(hangTram, hangChuc, hangDonvi);
+  text += DocGiaTri(hangTram, soChuSo--) + 'trăm ';
+  if (hangChuc != 0) {
+    text += DocGiaTri(hangChuc, soChuSo);
+    if (hangChuc > 1) {
+      text += 'mươi ';
+    }
+  } else if (hangChuc == 0 && hangDonvi > 0) {
+    text += 'linh ';
   }
-  giaTri = tam % 10;
-  text += DocGiaTri(giaTri, soChuSo);
+  soChuSo--;
+  if (hangDonvi > 1) {
+    text += DocGiaTri(hangDonvi, soChuSo);
+  } else if (hangDonvi == 1 && hangChuc <= 1) {
+    text += 'một';
+  } else if (hangDonvi == 1 && hangChuc > 1) {
+    text += 'mốt';
+  }
+  console.log(text);
+
   document.getElementById('txtBT3NC').innerHTML = text;
 };
